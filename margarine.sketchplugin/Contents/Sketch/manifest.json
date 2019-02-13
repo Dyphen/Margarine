@@ -1,0 +1,96 @@
+{
+  "name": "margarine",
+  "description": "Tiles layers together",
+  "author": ".j",
+  "homepage": "https://github.com/Dyphen/Margarine",
+  "version": "1.0",
+  "identifier": "com.margarine.sketchplugin",
+  "appcast": "",
+  "compatibleVersion": "39.1",
+  "bundleVersion": 1,
+  "commands": [
+    {
+      "name": "Tile selection Up",
+      "identifier": "tileSelectionUp",
+      "description": "Tile selection up",
+      "script": "margarine.js",
+      "handler": "tileSelectionUp",
+      "shortcut": ""
+    },
+    {
+      "name": "Tile selection Down",
+      "identifier": "tileSelectionDown",
+      "description": "Tile selection down",
+      "script": "margarine.js",
+      "handler": "tileSelectionDown",
+      "shortcut": ""
+    },
+    {
+      "name": "Tile selection Left",
+      "identifier": "tileSelectionLeft",
+      "description": "Tile selection left",
+      "script": "margarine.js",
+      "handler": "tileSelectionLeft",
+      "shortcut": ""
+    },
+    {
+      "name": "Tile selection Right",
+      "identifier": "tileSelectionRight",
+      "description": "Tile selection right",
+      "script": "margarine.js",
+      "handler": "tileSelectionRight",
+      "shortcut": ""
+    },
+    {
+      "name": "Space Selection Up",
+      "identifier": "tileSelectionUpAddingMargin",
+      "description": "Space selection up",
+      "script": "margarine.js",
+      "handler": "tileSelectionUpAddingMargin",
+      "shortcut": ""
+    },
+    {
+      "name": "Space Selection Down",
+      "identifier": "tileSelectionDownAddingMargin",
+      "description": "Space selection down",
+      "script": "margarine.js",
+      "handler": "tileSelectionDownAddingMargin",
+      "shortcut": ""
+    },
+    {
+      "name": "Space Selection Left",
+      "identifier": "tileSelectionLeftAddingMargin",
+      "description": "Space selection left",
+      "script": "margarine.js",
+      "handler": "tileSelectionLeftAddingMargin",
+      "shortcut": ""
+    },
+    {
+      "name": "Space Selection Right",
+      "identifier": "tileSelectionRightAddingMargin",
+      "description": "Space selection right",
+      "script": "margarine.js",
+      "handler": "tileSelectionRightAddingMargin",
+      "shortcut": ""
+    }
+  ],
+  "menu": {
+    "isRoot": true,
+    "items": [
+      {
+        "title": "Margarine",
+        "items": [
+          "tileSelectionUp",
+          "tileSelectionDown",
+          "tileSelectionLeft",
+          "tileSelectionRight",
+          "-",
+          "tileSelectionUpAddingMargin",
+          "tileSelectionDownAddingMargin",
+          "tileSelectionLeftAddingMargin",
+          "tileSelectionRightAddingMargin"
+        ]
+      }
+    ]
+  }
+}
