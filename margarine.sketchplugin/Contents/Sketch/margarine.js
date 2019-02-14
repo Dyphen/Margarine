@@ -57,6 +57,7 @@ function tileSelectionRightAddingMargin(context) {
 }
 
 function tileSelection(direction, prompt) {
+
   if (selection.count() == 0) {
     var page = document.currentPage()
     var artboard = page.currentArtboard()
@@ -70,52 +71,57 @@ function tileSelection(direction, prompt) {
   }
   if (selection.count() < 2) {
     document.showMessage("Please select more than 2 layers.");
-    return;
+    return;   
   }
   var gap = getGap(prompt)
+  
+  selection.forEach(function(layer) {
+    layer.select_byExtendingSelection(false, false)
+  })
 
-  var layers = selection.mutableCopy();
+  var layersArray = []
+  selection.forEach(function(layer) {
+    layersArray.push(layer)
+    layer.select_byExtendingSelection(true, true)
+  })
+
+  var layers = sortLayersForDirection(layersArray, direction)
 
   var rect = getRectFromLayers(layers);
-
+  
   var x = rect.x();
   var y = rect.y();
   var right = rect.maxX();
   var bottom = rect.maxY();
-
+  
 
   if (direction == 0) {
-    for (var i = 0; i < layers.count(); i++) {
+    for (var i = 0; i < layers.length; i++) {
       var layer = layers[i];
       layer.frame().setX(x);
-      layer.frame().setY(y);
       x = x + layer.frame().width() + gap;
     }
   }
 
   else if (direction == 1) {
-    for (var i = 0; i < layers.count(); i++) {
+    for (var i = 0; i < layers.length; i++) {
       var layer = layers[i];
       layer.frame().setMaxX(right);
-      layer.frame().setY(y);
       right = right - layer.frame().width() - gap;
     }
   }
   else if (direction == 2) {
-    for (var i = 0; i < layers.count(); i++) {
+    for (var i = 0; i < layers.length; i++) {
       var layer = layers[i];
-      log(`${layer.name()} (${x}, ${bottom})`);
-      layer.frame().setX(x);
-      layer.frame().setMaxY(bottom);
-      bottom = bottom - layer.frame().height() - gap;
+      layer.frame().setY(y);
+      y = y + layer.frame().height() + gap;
     }
   }
   else if (direction == 3) {
-    for (var i = 0; i < layers.count(); i++) {
+    for (var i = 0; i < layers.length; i++) {
       var layer = layers[i];
-      layer.frame().setX(x);
-      layer.frame().setY(y);
-      y = y + layer.frame().height() + gap;
+      layer.frame().setY(bottom-layer.frame().height());
+      bottom = bottom - layer.frame().height() - gap;
     }
   }
   var loopSelection = selection.objectEnumerator();
@@ -168,10 +174,46 @@ function getGap(prompt) {
 
 function getRectFromLayers(layers) {
   var rectArray = NSMutableArray.alloc().init();
-  var loopLayers = layers.objectEnumerator();
-  var layer;
-  while (layer = loopLayers.nextObject()) {
-    rectArray.addObject(layer.frame());
+  for (var i = 0; i < layers.length; i++){
+    rectArray.addObject(layers[i].frame());
   }
   return MSRect.rectWithUnionOfRects(rectArray);
+}
+
+function pageRectForLayer(layer) {
+  var frame = layer.frameForTransforms()
+  var coords = pageCoordinatesForLayer(layer)
+  return MSRect.rectWithX_y_width_height(coords.x, coords.y, frame.size.width, frame.size.height)
+}
+
+function sortLayersForDirection(layers, direction) {
+  document.showMessage(direction)
+  return layers.sort(function(a, b) {
+    var aFrame = pageRectForLayer(a)
+    var bFrame = pageRectForLayer(b)
+
+
+    switch(direction) {
+      case 0:
+        return aFrame.minX() <= bFrame.minX() ? -1 : 1
+      case 1:
+        return aFrame.maxX() >= bFrame.maxX() ? -1 : 1
+      case 2:
+        return aFrame.minY() <= bFrame.minY() ? -1 : 1
+      case 3:
+        return aFrame.maxY() >= bFrame.maxY() ? -1 : 1
+    }
+  })
+}
+
+function pageCoordinatesForLayer(layer) {
+  var x = 0, y = 0
+  
+  while(layer) {
+    var frame = layer.frameForTransforms()
+    x += frame.origin.x
+    y += frame.origin.y
+    layer = layer.parentGroup()
+  }
+  return { x: x, y: y}
 }

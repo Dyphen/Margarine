@@ -3,14 +3,14 @@
   "description": "Tiles layers together",
   "author": ".j",
   "homepage": "https://github.com/Dyphen/Margarine",
-  "version": "1.0",
+  "version": "1.1",
   "identifier": "com.margarine.sketchplugin",
   "appcast": "",
   "compatibleVersion": "39.1",
   "bundleVersion": 1,
   "commands": [
     {
-      "name": "Tile selection Up",
+      "name": "Tile Selection Up",
       "identifier": "tileSelectionUp",
       "description": "Tile selection up",
       "script": "margarine.js",
@@ -18,7 +18,7 @@
       "shortcut": ""
     },
     {
-      "name": "Tile selection Down",
+      "name": "Tile Selection Down",
       "identifier": "tileSelectionDown",
       "description": "Tile selection down",
       "script": "margarine.js",
@@ -26,7 +26,7 @@
       "shortcut": ""
     },
     {
-      "name": "Tile selection Left",
+      "name": "Tile Selection Left",
       "identifier": "tileSelectionLeft",
       "description": "Tile selection left",
       "script": "margarine.js",
@@ -34,7 +34,7 @@
       "shortcut": ""
     },
     {
-      "name": "Tile selection Right",
+      "name": "Tile Selection Right",
       "identifier": "tileSelectionRight",
       "description": "Tile selection right",
       "script": "margarine.js",
