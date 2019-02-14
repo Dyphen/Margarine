@@ -1,6 +1,6 @@
 # Margarine Sketch Plugin
 
-### A quick-fix alternative to Peter Berrecloth's [Butter Sketch Plugin](http://www.sketchtips.info/articles/custom-shortcuts), utilizing tiling from Ashung Hung's [Automate Sketch](https://github.com/Ashung/Automate-Sketch/).
+### A quick-fix alternative to Peter Berrecloth's [Butter Sketch Plugin](https://github.com/pberrecloth/butter-sketch-plugin/), utilizing tiling from Ashung Hung's [Automate Sketch](https://github.com/Ashung/Automate-Sketch/).
 
 Rebuilt Butter to work in Sketch v53.
 
